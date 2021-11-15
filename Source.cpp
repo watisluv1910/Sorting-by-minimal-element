@@ -113,32 +113,42 @@ double initializeDouble(string path, double lowerBound, double upperBound) {
 
 void sorting() {
 	cout << "\nEnter the number of elements in array:\n";
+	// minimal number of elements is 2:
 	double arrayLength = 
 		initializeDouble("all", 2.0, numeric_limits<double>::max());
+	// pointer to dynamic array of type double and size 2:
 	double* array = new double[2];
 	cout << "\nEnter the elements:\n";
+	// two first elements:
 	array[0] = initializeDouble("all", 0, 0);
 	array[1] = initializeDouble("all", 0, 0);
+	// if needful size of array > 2, than extend it:
 	for (size_t i = 2; i < arrayLength; i++) {
 		double* arrayExtended = new double[sizeof(*array) + 1];
+		// copying elements to the new length array:
 		for (unsigned int j = 0; j < sizeof(*array); j++) {
 			arrayExtended[j] = array[j];
 		}
-		delete[] array;
+		delete[] array; // deleting old length array
+		// assign the pointer with the old name 
+		// to the value of the pointer to the new array:
 		array = arrayExtended;
+		// new element in extended array:
 		array[i] = initializeDouble("all", 2.0, numeric_limits<double>::max());
 	}
 	cout << "\nThe sorted array is:\n";
 	// sorting:
-	for (size_t i = 0; i < arrayLength; i++) {
+	for (size_t i = 0; i < arrayLength; i++) { 	// general iteration
+		// beggining with maximal possible value:
 		double minimalElement = numeric_limits<double>::max();
-		size_t minimalElementIndex = 0;
-		for (size_t j = i; j < arrayLength; j++) {
+		size_t minimalElementIndex = 0; 
+		for (size_t j = i; j < arrayLength; j++) { // inserted iteration
 			if (array[j] < minimalElement) {
 				minimalElement = array[j];
 				minimalElementIndex = j;
 			}
 		}
+		// swap current and minimal element:
 		swap(array[i], array[minimalElementIndex]);
 		cout << array[i] << endl;
 	}

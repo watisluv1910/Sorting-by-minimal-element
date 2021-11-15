@@ -134,7 +134,7 @@ void sorting() {
 		// to the value of the pointer to the new array:
 		array = arrayExtended;
 		// new element in extended array:
-		array[i] = initializeDouble("all", 2.0, numeric_limits<double>::max());
+		array[i] = initializeDouble("all", 0, 0);
 	}
 	cout << "\nThe sorted array is:\n";
 	// sorting:
